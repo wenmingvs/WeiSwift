@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.wenming.weiswift.R;
+import com.wenming.weiswift.app.browser.activity.BrowserActivity;
 import com.wenming.weiswift.app.common.base.fragment.BaseFragment;
 import com.wenming.weiswift.app.common.utils.ToastUtil;
 import com.wenming.weiswift.app.main.activity.MainActivity;
@@ -111,9 +112,8 @@ public class SplashFragment extends BaseFragment implements SplashContract.View 
 
     @Override
     public void goToWebAuthActivity() {
-//        Intent intent = new Intent(mContext, WebViewActivity.class);
-//        intent.putExtra(WebViewActivity.EXTRA_URL, WeicoAuthConstants.AUTHURL);
-//        startActivity(intent);
+        Intent intent = BrowserActivity.getOpenIntent(mContext, com.wenming.weiswift.app.outh.Constants.WEICO_AUTH_URL);
+        startActivity(intent);
     }
 
     @Override

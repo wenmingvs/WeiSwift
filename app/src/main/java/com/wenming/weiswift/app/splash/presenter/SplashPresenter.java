@@ -21,10 +21,10 @@ import com.wenming.weiswift.app.splash.data.SplashDataSource;
  * Created by wenmingvs on 2018/01/09.
  */
 public class SplashPresenter implements SplashContract.Presenter {
-    private static final String BUDDLE_KEY_UID = "uid";
-    private static final String BUDDLE_KEY_ACCESS_TOKEN = "access_token";
-    private static final String BUDDLE_KEY_EXPIRES_IN = "expires_in";
-    private static final String BUDDLE_KEY_REFRESH_TOKEN = "refresh_token";
+    private static final String BUNDLE_KEY_UID = "uid";
+    private static final String BUNDLE_KEY_ACCESS_TOKEN = "access_token";
+    private static final String BUNDLE_KEY_EXPIRES_IN = "expires_in";
+    private static final String BUNDLE_KEY_REFRESH_TOKEN = "refresh_token";
     private static final int SPLASH_TIME = 500;
 
     private SplashContract.View mView;
@@ -73,14 +73,14 @@ public class SplashPresenter implements SplashContract.Presenter {
         mSSOHandler.authorizeClientSso(new WeiboAuthListener() {
             @Override
             public void onComplete(Bundle bundle) {
-                String uid = bundle.getString(BUDDLE_KEY_UID, "");
-                String accessToken = bundle.getString(BUDDLE_KEY_ACCESS_TOKEN, "");
-                String refreshToken = bundle.getString(BUDDLE_KEY_REFRESH_TOKEN, "");
-                String expiresIn = bundle.getString(BUDDLE_KEY_EXPIRES_IN, "");
+                String uid = bundle.getString(BUNDLE_KEY_UID, "");
+                String accessToken = bundle.getString(BUNDLE_KEY_ACCESS_TOKEN, "");
+                String refreshToken = bundle.getString(BUNDLE_KEY_REFRESH_TOKEN, "");
+                String expiresIn = bundle.getString(BUNDLE_KEY_REFRESH_TOKEN, "");
                 AccessTokenHelper.getInstance().setUid(Long.valueOf(uid));
                 AccessTokenHelper.getInstance().setAccessToken(accessToken);
                 AccessTokenHelper.getInstance().setRefreshToken(refreshToken);
-                AccessTokenHelper.getInstance().setExpiresTime(Long.valueOf(expiresIn));
+                AccessTokenHelper.getInstance().setExpiresIn(Long.valueOf(expiresIn));
                 mView.showAuthSuccess();
                 mView.goToMainActivity();
                 mView.finishActivity();

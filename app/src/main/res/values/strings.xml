@@ -28,10 +28,11 @@
     <string name="drawer_setting">设置</string>
     <string name="drawer_navigation_open">抽屉栏打开</string>
     <string name="drawer_navigation_close">抽屉栏关闭</string>
-    <!-- Splsh页文案 -->
+    <!-- Splash页文案 -->
     <string name="splash_hint">登录一下，精彩内容马上就来</string>
     <string name="splash_sso_auth_text">客户端授权</string>
     <string name="splash_web_auth_text">网页端授权</string>
     <string name="splash_web_auth_success">客户端授权成功</string>
     <string name="splash_web_auth_cancel">客户端授权取消</string>
+    <string name="splash_web_auth_login">网页授权</string>
 </resources>

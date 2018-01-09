@@ -3,9 +3,11 @@ package com.wenming.weiswift.app.common.base.fragment;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.wenming.weiswift.R;
 import com.wenming.weiswift.app.common.thread.ThreadHelper;
 
 
@@ -18,6 +20,7 @@ public abstract class BaseFragment extends Fragment {
     private static final String TAG = "BaseFragment";
 
     protected Context mContext;
+    protected Toolbar mToolBar;
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return false;
@@ -63,5 +66,9 @@ public abstract class BaseFragment extends Fragment {
             return getView().findViewById(paramInt);
         }
         return null;
+    }
+
+    protected void initTopBar() {
+        mToolBar = (Toolbar) findViewById(R.id.common_toolbar);
     }
 }

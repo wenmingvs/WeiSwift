@@ -66,11 +66,11 @@ public class AccessTokenHelper {
         CommonPreference.setRefreshAccessToken(refreshToken);
     }
 
-    public long getExpiresTime() {
+    public long getExpiresIn() {
         return mExpiresIn;
     }
 
-    public void setExpiresTime(long expiresTime) {
+    public void setExpiresIn(long expiresTime) {
         this.mExpiresIn = expiresTime;
         CommonPreference.setExpiresTime(expiresTime);
     }
