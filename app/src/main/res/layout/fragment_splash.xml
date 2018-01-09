@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash_bg" />
+
+    <LinearLayout
+        android:id="@+id/splash_container_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="@string/splash_hint"
+            android:textColor="@color/splash_login_hint"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/splash_sso_auth_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:drawableLeft="@drawable/splash_sina_icon"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="@string/splash_sso_auth_text"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:theme="@style/SplashButton" />
+
+            <Button
+                android:id="@+id/splash_web_auth_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/splash_sina_icon"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="@string/splash_web_auth_text"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:theme="@style/SplashButton" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
