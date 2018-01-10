@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * <p>
  * Created by wenmingvs on 2018/1/10.
  */
-public class Status {
+public class StatusEntity {
     /**
      * 微博创建时间
      */
@@ -69,7 +69,7 @@ public class Status {
     /**
      * 微博图片字段
      */
-    private ArrayList<PicUrlEntity> picUrls;
+    private ArrayList<ImgUrlEntity> picUrls;
     /**
      * 缩略图片地址（小图），没有时不返回此字段
      */
@@ -88,11 +88,11 @@ public class Status {
     /**
      * 微博作者的用户信息字段
      */
-    private User user;
+    private UserEntity user;
     /**
      * 被转发的原微博信息字段，当该微博为转发微博时返回
      */
-    private Status retweetedStatus;
+    private StatusEntity retweetedStatusEntity;
     /**
      * 转发数
      */
@@ -247,11 +247,11 @@ public class Status {
         this.inReplyToScreenName = inReplyToScreenName;
     }
 
-    public ArrayList<PicUrlEntity> getPicUrls() {
+    public ArrayList<ImgUrlEntity> getPicUrls() {
         return picUrls;
     }
 
-    public void setPicUrls(ArrayList<PicUrlEntity> picUrls) {
+    public void setPicUrls(ArrayList<ImgUrlEntity> picUrls) {
         this.picUrls = picUrls;
     }
 
@@ -295,20 +295,20 @@ public class Status {
         this.mBlogVipType = mBlogVipType;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
-    public Status getRetweetedStatus() {
-        return retweetedStatus;
+    public StatusEntity getRetweetedStatusEntity() {
+        return retweetedStatusEntity;
     }
 
-    public void setRetweetedStatus(Status retweetedStatus) {
-        this.retweetedStatus = retweetedStatus;
+    public void setRetweetedStatusEntity(StatusEntity retweetedStatusEntity) {
+        this.retweetedStatusEntity = retweetedStatusEntity;
     }
 
     public int getRepostsCount() {

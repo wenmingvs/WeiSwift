@@ -27,7 +27,7 @@ import com.wenming.weiswift.app.common.base.activity.BaseAppCompatActivity;
 import com.wenming.weiswift.app.common.thread.ThreadHelper;
 import com.wenming.weiswift.app.user.callback.UserInfoCallBack;
 import com.wenming.weiswift.app.user.UserManager;
-import com.wenming.weiswift.app.common.entity.User;
+import com.wenming.weiswift.app.common.entity.UserEntity;
 
 
 public class MainActivity extends BaseAppCompatActivity {
@@ -137,7 +137,7 @@ public class MainActivity extends BaseAppCompatActivity {
     private void loadUserInfo() {
        UserManager.getInstance().loadUserInfo(AccessTokenManager.getInstance().getUid(), new UserInfoCallBack() {
             @Override
-            public void onSuccess(final User user) {
+            public void onSuccess(final UserEntity user) {
                 ThreadHelper.instance().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -161,7 +161,7 @@ public class MainActivity extends BaseAppCompatActivity {
         UserManager.getInstance().requestUserInfo(AccessTokenManager.getInstance().getOAuthToken().getToken(),
                 AppAuthConstants.APP_KEY, Long.valueOf(AccessTokenManager.getInstance().getOAuthToken().getUid()), new UserInfoCallBack() {
                     @Override
-                    public void onSuccess(User user) {
+                    public void onSuccess(UserEntity user) {
                         updateUserViews(user);
                     }
 
@@ -172,7 +172,7 @@ public class MainActivity extends BaseAppCompatActivity {
                 });
     }
 
-    private void updateUserViews(User user) {
+    private void updateUserViews(UserEntity user) {
         //设置头像
         ImageLoader.getInstance().displayImage(user.avatar_hd, mDrawerAvatarIv, mOptions);
         //设置昵称
@@ -335,7 +335,7 @@ public class MainActivity extends BaseAppCompatActivity {
      */
     private void showProfileFragment() {
         if (mMySelfFragment == null) {
-            User currentUser = UserManager.getInstance().getUser();
+            UserEntity currentUser = UserManager.getInstance().getUser();
             if (mHomeFragment != null && currentUser != null) {
                 mMySelfFragment = MySelfFragment.newInstance(currentUser);
             } else {

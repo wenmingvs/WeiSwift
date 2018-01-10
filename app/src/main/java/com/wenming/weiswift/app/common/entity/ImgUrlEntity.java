@@ -5,7 +5,7 @@ package com.wenming.weiswift.app.common.entity;
  * <p>
  * Created by wenmingvs on 2018/1/10.
  */
-public class PicUrlEntity {
+public class ImgUrlEntity {
     private String thumbnailPic;
     private String bmiddlePic;
     private String originalPic;

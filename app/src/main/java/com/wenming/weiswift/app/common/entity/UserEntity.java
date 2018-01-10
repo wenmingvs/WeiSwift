@@ -5,7 +5,7 @@ package com.wenming.weiswift.app.common.entity;
  * <p>
  * Created by wenmingvs on 2018/1/10.
  */
-public class User {
+public class UserEntity {
     /**
      * 用户UID
      */
@@ -116,7 +116,7 @@ public class User {
     /**
      * 用户的最近一条微博信息字段
      */
-    private Status status;
+    private StatusEntity statusEntity;
 
     private String pType;
 
@@ -388,12 +388,12 @@ public class User {
         this.remark = remark;
     }
 
-    public Status getStatus() {
-        return status;
+    public StatusEntity getStatusEntity() {
+        return statusEntity;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatusEntity(StatusEntity statusEntity) {
+        this.statusEntity = statusEntity;
     }
 
     public String get() {

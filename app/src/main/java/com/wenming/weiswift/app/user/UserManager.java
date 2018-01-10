@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.wenming.weiswift.app.common.constants.APIConstants;
-import com.wenming.weiswift.app.common.entity.User;
+import com.wenming.weiswift.app.common.entity.UserEntity;
 import com.wenming.weiswift.app.common.net.HttpManager;
 import com.wenming.weiswift.app.common.thread.ThreadHelper;
 import com.wenming.weiswift.app.user.callback.UserInfoCallBack;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class UserManager {
     private static UserManager sInstance;
-    private User mUser;
+    private UserEntity mUser;
 
     private UserManager() {
     }
@@ -35,11 +35,11 @@ public class UserManager {
         return sInstance;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return mUser;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.mUser = user;
     }
 
@@ -63,7 +63,7 @@ public class UserManager {
         HttpManager.getInstance().httpStringGetRequest(APIConstants.USER_SHOW, params, new Object(), new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {
-                mUser = User.parse(response);
+                mUser = UserEntity.parse(response);
                 if (mUser != null) {
                     ThreadHelper.instance().runOnWorkThread(new ThreadHelper.Task() {
                         @Override
@@ -91,7 +91,7 @@ public class UserManager {
             public void onRun() {
                 String json = TextSaveUtils.read(UserInfoCacheConfig.getUserInfoDir(uid), UserInfoCacheConfig.FILE_USER_INFO);
                 if (!TextUtils.isEmpty(json)) {
-                    mUser = User.parse(json);
+                    mUser = UserEntity.parse(json);
                     callBack.onSuccess(mUser);
                 } else {
                     callBack.onFail();
