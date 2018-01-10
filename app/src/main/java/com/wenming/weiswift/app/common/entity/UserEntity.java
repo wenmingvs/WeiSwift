@@ -69,21 +69,21 @@ public class UserEntity {
     /**
      * 粉丝数
      */
-    private int followersCount;
+    private long followersCount;
     /**
      * 关注数
      */
-    private int friendsCount;
+    private long friendsCount;
 
-    private int pageFriendsCount;
+    private long pageFriendsCount;
     /**
      * 微博数
      */
-    private int statusesCount;
+    private long statusesCount;
     /**
      * 收藏数
      */
-    private int favouritesCount;
+    private long favouritesCount;
     /**
      * 用户创建（注册）时间
      */
@@ -292,43 +292,43 @@ public class UserEntity {
         this.gender = gender;
     }
 
-    public int getFollowersCount() {
+    public long getFollowersCount() {
         return followersCount;
     }
 
-    public void setFollowersCount(int followersCount) {
+    public void setFollowersCount(long followersCount) {
         this.followersCount = followersCount;
     }
 
-    public int getFriendsCount() {
+    public long getFriendsCount() {
         return friendsCount;
     }
 
-    public void setFriendsCount(int friendsCount) {
+    public void setFriendsCount(long friendsCount) {
         this.friendsCount = friendsCount;
     }
 
-    public int getPageFriendsCount() {
+    public long getPageFriendsCount() {
         return pageFriendsCount;
     }
 
-    public void setPageFriendsCount(int pageFriendsCount) {
+    public void setPageFriendsCount(long pageFriendsCount) {
         this.pageFriendsCount = pageFriendsCount;
     }
 
-    public int getStatusesCount() {
+    public long getStatusesCount() {
         return statusesCount;
     }
 
-    public void setStatusesCount(int statusesCount) {
+    public void setStatusesCount(long statusesCount) {
         this.statusesCount = statusesCount;
     }
 
-    public int getFavouritesCount() {
+    public long getFavouritesCount() {
         return favouritesCount;
     }
 
-    public void setFavouritesCount(int favouritesCount) {
+    public void setFavouritesCount(long favouritesCount) {
         this.favouritesCount = favouritesCount;
     }
 

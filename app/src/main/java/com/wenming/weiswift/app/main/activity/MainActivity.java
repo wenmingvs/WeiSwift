@@ -20,14 +20,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.wenming.weiswift.R;
 import com.wenming.weiswift.app.common.application.ApplicationHelper;
 import com.wenming.weiswift.app.common.base.activity.BaseAppCompatActivity;
-import com.wenming.weiswift.app.common.thread.ThreadHelper;
-import com.wenming.weiswift.app.user.callback.UserInfoCallBack;
-import com.wenming.weiswift.app.user.UserManager;
 import com.wenming.weiswift.app.common.entity.UserEntity;
+import com.wenming.weiswift.app.common.thread.ThreadHelper;
+import com.wenming.weiswift.app.outh.AccessTokenHelper;
+import com.wenming.weiswift.app.outh.Constants;
+import com.wenming.weiswift.app.user.UserManager;
+import com.wenming.weiswift.app.user.callback.UserInfoCallBack;
 
 
 public class MainActivity extends BaseAppCompatActivity {
@@ -54,7 +55,7 @@ public class MainActivity extends BaseAppCompatActivity {
     private LinearLayout mDrawerFollowerCountLl;
     private View mNavigationHeader;
     //内容碎片
-    private HomeFragment mHomeFragment;
+    //private HomeFragment mHomeFragment;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mTransaction;
 
@@ -135,7 +136,7 @@ public class MainActivity extends BaseAppCompatActivity {
     }
 
     private void loadUserInfo() {
-       UserManager.getInstance().loadUserInfo(AccessTokenManager.getInstance().getUid(), new UserInfoCallBack() {
+        UserManager.getInstance().loadUserInfo(AccessTokenHelper.getInstance().getUid(), new UserInfoCallBack() {
             @Override
             public void onSuccess(final UserEntity user) {
                 ThreadHelper.instance().runOnUiThread(new Runnable() {
@@ -158,33 +159,33 @@ public class MainActivity extends BaseAppCompatActivity {
      * 网络请求我的信息
      */
     private void requestMySelfInfo() {
-        UserManager.getInstance().requestUserInfo(AccessTokenManager.getInstance().getOAuthToken().getToken(),
-                AppAuthConstants.APP_KEY, Long.valueOf(AccessTokenManager.getInstance().getOAuthToken().getUid()), new UserInfoCallBack() {
-                    @Override
-                    public void onSuccess(UserEntity user) {
-                        updateUserViews(user);
-                    }
+        //TODO 替换appkey
+        UserManager.getInstance().requestUserInfo(AccessTokenHelper.getInstance().getAccessToken(), Constants.WEICO_APP_KEY, Long.valueOf(AccessTokenHelper.getInstance().getUid()), new UserInfoCallBack() {
+            @Override
+            public void onSuccess(UserEntity user) {
+                updateUserViews(user);
+            }
 
-                    @Override
-                    public void onFail() {
+            @Override
+            public void onFail() {
 
-                    }
-                });
+            }
+        });
     }
 
     private void updateUserViews(UserEntity user) {
-        //设置头像
-        ImageLoader.getInstance().displayImage(user.avatar_hd, mDrawerAvatarIv, mOptions);
-        //设置昵称
-        mDrawerNickNameIv.setText(user.name);
-        //设置简介
-        mDrawerDescriptionIv.setText(String.format(getString(R.string.drawer_desciption_format), user.description));
-        //设置微博数
-        mDrawerWeiBoCountTv.setText(String.valueOf(user.statuses_count));
-        //设置关注数
-        mDrawerFocusCountTv.setText(String.valueOf(user.friends_count));
-        //设置粉丝数
-        mDrawerFollowersCountTv.setText(String.valueOf(user.followers_count));
+//        //设置头像
+//        ImageLoader.getInstance().displayImage(user.avatar_hd, mDrawerAvatarIv, mOptions);
+//        //设置昵称
+//        mDrawerNickNameIv.setText(user.name);
+//        //设置简介
+//        mDrawerDescriptionIv.setText(String.format(getString(R.string.drawer_desciption_format), user.description));
+//        //设置微博数
+//        mDrawerWeiBoCountTv.setText(String.valueOf(user.statuses_count));
+//        //设置关注数
+//        mDrawerFocusCountTv.setText(String.valueOf(user.friends_count));
+//        //设置粉丝数
+//        mDrawerFollowersCountTv.setText(String.valueOf(user.followers_count));
     }
 
     private void initListener() {
@@ -194,9 +195,9 @@ public class MainActivity extends BaseAppCompatActivity {
                 if (UserManager.getInstance().getUser() == null) {
                     return;
                 }
-                Intent intent = new Intent(mContext, MyWeiBoSwipeActivity.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawers();
+//                Intent intent = new Intent(mContext, MyWeiBoSwipeActivity.class);
+//                startActivity(intent);
+//                mDrawerLayout.closeDrawers();
             }
         });
         mDrawerWeiBoContainerLl.setOnClickListener(new View.OnClickListener() {
@@ -205,9 +206,9 @@ public class MainActivity extends BaseAppCompatActivity {
                 if (UserManager.getInstance().getUser() == null) {
                     return;
                 }
-                Intent intent = new Intent(mContext, MyWeiBoSwipeActivity.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawers();
+//                Intent intent = new Intent(mContext, MyWeiBoSwipeActivity.class);
+//                startActivity(intent);
+//                mDrawerLayout.closeDrawers();
             }
         });
         mDrawerFocusContainerLl.setOnClickListener(new View.OnClickListener() {
@@ -216,9 +217,9 @@ public class MainActivity extends BaseAppCompatActivity {
                 if (UserManager.getInstance().getUser() == null) {
                     return;
                 }
-                Intent intent = new Intent(mContext, FocusSwipeActivity.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawers();
+//                Intent intent = new Intent(mContext, FocusSwipeActivity.class);
+//                startActivity(intent);
+//                mDrawerLayout.closeDrawers();
             }
         });
         mDrawerFollowerCountLl.setOnClickListener(new View.OnClickListener() {
@@ -227,9 +228,9 @@ public class MainActivity extends BaseAppCompatActivity {
                 if (UserManager.getInstance().getUser() == null) {
                     return;
                 }
-                Intent intent = new Intent(mContext, FansSwipeActivity.class);
-                startActivity(intent);
-                mDrawerLayout.closeDrawers();
+//                Intent intent = new Intent(mContext, FansSwipeActivity.class);
+//                startActivity(intent);
+//                mDrawerLayout.closeDrawers();
             }
         });
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -246,15 +247,15 @@ public class MainActivity extends BaseAppCompatActivity {
                         if (UserManager.getInstance().getUser() == null) {
                             return false;
                         }
-                        Intent intent = new Intent(mContext, CollectSwipeActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(mContext, CollectSwipeActivity.class);
+//                        startActivity(intent);
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.drawer_menu_hotweibo:
                         setTabFragment(TAB_DISCOVERY_FRAGMENT);
                         break;
                     case R.id.drawer_menu_setting:
-                        startActivity(new Intent(mContext, SettingSwipeActivity.class));
+//                        startActivity(new Intent(mContext, SettingSwipeActivity.class));
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -293,14 +294,14 @@ public class MainActivity extends BaseAppCompatActivity {
      * 切换到首页模块
      */
     private void showHomeFragment() {
-        if (mHomeFragment == null) {
-            mHomeFragment = HomeFragment.newInstance(mRefreshAll);
-            mHomeFragment.setTabLayout(mTabLayout);
-            new HomePresenter(new HomeDataManager(mContext), mHomeFragment);
-            mTransaction.add(R.id.main_content_fl, mHomeFragment, TAB_HOME_FRAGMENT);
-        } else {
-            mTransaction.show(mHomeFragment);
-        }
+//        if (mHomeFragment == null) {
+//            mHomeFragment = HomeFragment.newInstance(mRefreshAll);
+//            mHomeFragment.setTabLayout(mTabLayout);
+//            new HomePresenter(new HomeDataManager(mContext), mHomeFragment);
+//            mTransaction.add(R.id.main_content_fl, mHomeFragment, TAB_HOME_FRAGMENT);
+//        } else {
+//            mTransaction.show(mHomeFragment);
+//        }
         mTabLayout.setVisibility(View.VISIBLE);
     }
 
@@ -308,12 +309,12 @@ public class MainActivity extends BaseAppCompatActivity {
      * 切换到消息模块
      */
     private void showMessageFragment() {
-        if (mMessageFragment == null) {
-            mMessageFragment = new MessageFragment();
-            mTransaction.add(R.id.main_content_fl, mMessageFragment, TAB_MESSAGE_FRAGMENT);
-        } else {
-            mTransaction.show(mMessageFragment);
-        }
+//        if (mMessageFragment == null) {
+//            mMessageFragment = new MessageFragment();
+//            mTransaction.add(R.id.main_content_fl, mMessageFragment, TAB_MESSAGE_FRAGMENT);
+//        } else {
+//            mTransaction.show(mMessageFragment);
+//        }
         mTabLayout.setVisibility(View.GONE);
     }
 
@@ -321,12 +322,12 @@ public class MainActivity extends BaseAppCompatActivity {
      * 切换到发现模块
      */
     private void showDiscoveryFragment() {
-        if (mDiscoverFragment == null) {
-            mDiscoverFragment = new DiscoverFragment();
-            mTransaction.add(R.id.main_content_fl, mDiscoverFragment, TAB_DISCOVERY_FRAGMENT);
-        } else {
-            mTransaction.show(mDiscoverFragment);
-        }
+//        if (mDiscoverFragment == null) {
+//            mDiscoverFragment = new DiscoverFragment();
+//            mTransaction.add(R.id.main_content_fl, mDiscoverFragment, TAB_DISCOVERY_FRAGMENT);
+//        } else {
+//            mTransaction.show(mDiscoverFragment);
+//        }
         mTabLayout.setVisibility(View.GONE);
     }
 
@@ -334,17 +335,17 @@ public class MainActivity extends BaseAppCompatActivity {
      * 切换到关于我模块
      */
     private void showProfileFragment() {
-        if (mMySelfFragment == null) {
-            UserEntity currentUser = UserManager.getInstance().getUser();
-            if (mHomeFragment != null && currentUser != null) {
-                mMySelfFragment = MySelfFragment.newInstance(currentUser);
-            } else {
-                mMySelfFragment = MySelfFragment.newInstance();
-            }
-            mTransaction.add(R.id.main_content_fl, mMySelfFragment, TAB_PROFILE_FRAGMENT);
-        } else {
-            mTransaction.show(mMySelfFragment);
-        }
+//        if (mMySelfFragment == null) {
+//            UserEntity currentUser = UserManager.getInstance().getUser();
+//            if (mHomeFragment != null && currentUser != null) {
+//                mMySelfFragment = MySelfFragment.newInstance(currentUser);
+//            } else {
+//                mMySelfFragment = MySelfFragment.newInstance();
+//            }
+//            mTransaction.add(R.id.main_content_fl, mMySelfFragment, TAB_PROFILE_FRAGMENT);
+//        } else {
+//            mTransaction.show(mMySelfFragment);
+//        }
         mTabLayout.setVisibility(View.GONE);
     }
 
@@ -375,9 +376,9 @@ public class MainActivity extends BaseAppCompatActivity {
         //如果在当前页
         switch (currentIndex) {
             case TAB_HOME_FRAGMENT:
-                if (mHomeFragment != null) {
-                    mHomeFragment.scrollToTop();
-                }
+//                if (mHomeFragment != null) {
+//                    mHomeFragment.scrollToTop();
+//                }
                 break;
             case TAB_MESSAGE_FRAGMENT:
                 break;
@@ -393,27 +394,27 @@ public class MainActivity extends BaseAppCompatActivity {
      * 隐藏所有的fragment，并且取消所有的底部导航栏的icon的高亮状态
      */
     private void hideAllFragments(FragmentTransaction transaction) {
-        if (mHomeFragment != null) {
-            transaction.hide(mHomeFragment);
-        }
-        if (mMessageFragment != null) {
-            transaction.hide(mMessageFragment);
-        }
-
-        if (mDiscoverFragment != null) {
-            transaction.hide(mDiscoverFragment);
-        }
-        if (mMySelfFragment != null) {
-            transaction.hide(mMySelfFragment);
-        }
+//        if (mHomeFragment != null) {
+//            transaction.hide(mHomeFragment);
+//        }
+//        if (mMessageFragment != null) {
+//            transaction.hide(mMessageFragment);
+//        }
+//
+//        if (mDiscoverFragment != null) {
+//            transaction.hide(mDiscoverFragment);
+//        }
+//        if (mMySelfFragment != null) {
+//            transaction.hide(mMySelfFragment);
+//        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (mHomeFragment != null) {
-            mHomeFragment.onActivityResult(requestCode, resultCode, data);
-        }
+//        if (mHomeFragment != null) {
+//            mHomeFragment.onActivityResult(requestCode, resultCode, data);
+//        }
     }
 
     /**
@@ -427,7 +428,7 @@ public class MainActivity extends BaseAppCompatActivity {
                 mSnackbar.setAction(getString(R.string.main_back_press_ok), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((ApplicationHelper) getApplication()).finishAll();
+                        ApplicationHelper.getInstance().finishAll();
                     }
                 });
             }
@@ -450,9 +451,9 @@ public class MainActivity extends BaseAppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.toolbar_write_weibo:
-                Intent intent = new Intent(mContext, IdeaSwipeActivity.class);
-                intent.putExtra("ideaType", PostService.POST_SERVICE_CREATE_WEIBO);
-                startActivity(intent);
+//                Intent intent = new Intent(mContext, IdeaSwipeActivity.class);
+//                intent.putExtra("ideaType", PostService.POST_SERVICE_CREATE_WEIBO);
+//                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

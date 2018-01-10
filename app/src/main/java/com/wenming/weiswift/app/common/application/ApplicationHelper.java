@@ -5,6 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Application帮助类，用于获取context，区分app在前台还是后台
  * <p>
@@ -14,6 +17,7 @@ public class ApplicationHelper implements Application.ActivityLifecycleCallbacks
     private Application mApplication;
     private int mForegroundActivityCount;
     private static ApplicationHelper sInstance;
+    private List<Activity> mActivityList = new LinkedList<>();
 
     private ApplicationHelper() {
     }
@@ -44,6 +48,7 @@ public class ApplicationHelper implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        mActivityList.add(activity);
     }
 
     @Override
@@ -71,6 +76,15 @@ public class ApplicationHelper implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        mActivityList.remove(activity);
+    }
+
+    public void finishAll() {
+        for (Activity activity : mActivityList) {
+            if (!activity.isFinishing()) {
+                activity.finish();
+            }
+        }
     }
 
     /**
